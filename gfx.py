@@ -13,9 +13,10 @@ class Window():
     def redraw(self):
         self._root.update_idletasks()
         self._root.update()
+    
     def draw_line(self, line, fill_color="black"):
         line.draw(self._canvas, fill_color)
-    
+        
     def wait_for_close(self):
         self._running = True
         while self._running:
@@ -49,6 +50,9 @@ class Cell():
         self._y2 = None
         self._win = win
         
+    def get_center(self):
+        return ((self._x1+self._x2)//2, (self._y1+self._y2)//2)
+    
     def draw(self, x1, y1, x2, y2):
         self._x1 = x1
         self._y1 = y1
@@ -63,3 +67,16 @@ class Cell():
             self._win.draw_line(Line(Point(x1, y1), Point(x2, y1)))
         if self.has_bottom_wall:
             self._win.draw_line(Line(Point(x1, y2), Point(x2, y2)))
+            
+    def draw_move(self, to_cell, undo=False):
+        from_cell_center = self.get_center()
+        to_cell_center = to_cell.get_center()
+        
+        color = "red" if undo is True else "gray"
+        
+        move_line = Line(
+                    Point(from_cell_center[0], from_cell_center[1]),
+                    Point(to_cell_center[0], to_cell_center[1])
+                    )
+        
+        self._win.draw_line(move_line, fill_color=color)
