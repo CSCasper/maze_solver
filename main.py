@@ -1,17 +1,19 @@
 from gfx import Window
-from cell import Cell
+from maze import Maze
+
+WIN_W = 805
+WIN_H = 605
+
+MAZE_OFFSET = 5
+
+CELL_SIZE = 50
+
+NUM_ROWS = (WIN_W - MAZE_OFFSET) // CELL_SIZE
+NUM_COLS = (WIN_H - MAZE_OFFSET) // CELL_SIZE
 
 if __name__ == '__main__':
-    win = Window(800, 600)
-    cell_1 = Cell(win)
-    cell_2 = Cell(win)
-    cell_3 = Cell(win)
-
-    cell_1.draw(30, 30, 60, 60)
-    cell_2.draw(60, 30, 90, 60)
-    cell_3.draw(60, 60, 90, 90)
-    
-    cell_1.draw_move(cell_2)
-    cell_2.draw_move(cell_3, True)
+    win = Window(WIN_W, WIN_H)
+        
+    maze = Maze(MAZE_OFFSET, MAZE_OFFSET, NUM_COLS, NUM_ROWS, CELL_SIZE, CELL_SIZE, win)
     
     win.wait_for_close()
