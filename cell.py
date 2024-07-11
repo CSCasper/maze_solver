@@ -11,6 +11,7 @@ class Cell():
         self._y1 = None
         self._y2 = None
         self._win = win
+        self.visited = False
         
     def get_center(self):
         return ((self._x1+self._x2)//2, (self._y1+self._y2)//2)
