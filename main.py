@@ -15,5 +15,6 @@ if __name__ == '__main__':
     win = Window(WIN_W, WIN_H)
         
     maze = Maze(MAZE_OFFSET, MAZE_OFFSET, NUM_COLS, NUM_ROWS, CELL_SIZE, CELL_SIZE, win)
+    maze.solve()
     
     win.wait_for_close()
